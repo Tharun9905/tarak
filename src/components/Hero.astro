@@ -1,9 +1,9 @@
 ---
 ---
-<section id="hero" class="relative w-full h-[100svh] flex flex-col lg:flex-row overflow-hidden bg-void">
+<section id="hero" class="relative w-full min-h-[100svh] lg:h-[100svh] flex flex-col lg:flex-row overflow-hidden bg-void">
   
   <!-- Left Side: Video (60% Desktop, 100% Mobile) -->
-  <div class="relative w-full lg:w-[60%] h-[50vh] lg:h-full">
+  <div class="relative w-full lg:w-[60%] h-[45vh] lg:h-full shrink-0">
     <video
       id="hero-video"
       class="w-full h-full object-cover opacity-0"
@@ -22,19 +22,19 @@
   </div>
 
   <!-- Right Side: Content (40% Desktop, Full Mobile) -->
-  <div class="right-panel w-full lg:w-[40%] h-[50vh] lg:h-full flex flex-col justify-center px-6 lg:px-14 xl:px-20 relative z-10 opacity-0 translate-x-8 lg:translate-x-16">
+  <div class="right-panel w-full lg:w-[40%] flex-1 lg:h-full flex flex-col justify-center px-6 py-12 lg:py-0 lg:px-14 xl:px-20 relative z-10 opacity-0 translate-x-4 lg:translate-x-16">
     
     <div class="hero-content space-y-2 lg:space-y-3">
-      <p class="hero-sub font-mono text-ember text-sm tracking-wide lowercase pt-4 lg:pt-0">
+      <p class="hero-sub font-mono text-ember text-sm tracking-wide lowercase pt-2 lg:pt-0">
         est. kalyandurgam
       </p>
       
       <h1 class="font-display uppercase leading-[0.85] flex flex-col gap-1">
         <div class="relative overflow-hidden w-full pb-1">
-          <span class="hero-title-word block text-[5rem] lg:text-[6rem] xl:text-[7.5rem] tracking-tight text-cream">TARAK</span>
+          <span class="hero-title-word block text-[4.5rem] md:text-[5.5rem] lg:text-[6rem] xl:text-[7.5rem] tracking-tight text-cream">TARAK</span>
         </div>
         <div class="relative overflow-hidden w-full pb-1">
-          <span class="hero-title-word block text-[5rem] lg:text-[6rem] xl:text-[7.5rem] tracking-tight text-ember">STUDIO</span>
+          <span class="hero-title-word block text-[4.5rem] md:text-[5.5rem] lg:text-[6rem] xl:text-[7.5rem] tracking-tight text-ember">STUDIO</span>
         </div>
       </h1>
       
@@ -43,17 +43,17 @@
       </p>
       
       <div class="hero-cta flex flex-wrap items-center gap-4 lg:gap-6 pt-8 pb-10 lg:pb-0 relative z-20">
-        <a href="#contact" class="bg-ember text-charcoal font-semibold px-6 py-3 lg:px-8 lg:py-4 hover:bg-ember-glow transition-all duration-300 shadow-[0_0_20px_rgba(212,98,42,0.3)] hover:shadow-[0_0_30px_rgba(255,140,82,0.6)]">
+        <a href="#contact" class="bg-ember text-charcoal font-semibold px-6 py-3 lg:px-8 lg:py-4 hover:bg-ember-glow transition-all duration-300 shadow-[0_0_20px_rgba(212,98,42,0.3)] hover:shadow-[0_0_30px_rgba(255,140,82,0.6)] text-sm lg:text-base border border-ember text-center">
           📸 Book Your Session
         </a>
-        <a href="#portfolio" class="text-cream hover:text-ember transition-colors duration-300 font-medium flex items-center gap-2 group">
+        <a href="#portfolio" class="text-cream hover:text-ember transition-colors duration-300 font-medium flex items-center gap-2 group text-sm lg:text-base w-full sm:w-auto mt-2 sm:mt-0">
           <span class="text-ember group-hover:translate-x-1 transition-transform">▶</span> Watch Our Work
         </a>
       </div>
     </div>
     
     <!-- Pinned Contact Strip -->
-    <div class="absolute bottom-6 lg:bottom-10 left-6 lg:left-14 xl:left-20 text-xs font-mono text-muted-film flex flex-col gap-2">
+    <div class="absolute lg:bottom-10 bottom-4 left-6 lg:left-14 xl:left-20 text-xs font-mono text-muted-film flex flex-col gap-2">
       <a href="tel:+918919619403" class="hover:text-cream transition-colors block">📞 +91 89196 19403</a>
       <span class="block">📍 Jaynagar, Kalyandurg, AP</span>
     </div>
