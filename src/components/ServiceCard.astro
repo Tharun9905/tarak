@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+}
+
+const { title, description, image } = Astro.props;
+---
+<div class="service-card group relative w-[85vw] sm:w-[300px] lg:w-[360px] h-[450px] lg:h-[520px] flex-shrink-0 border border-charcoal bg-charcoal/50 p-8 flex flex-col justify-end overflow-hidden transition-all duration-700 hover:border-ember hover:shadow-[0_0_30px_rgba(212,98,42,0.15)] transform hover:-translate-y-2 cursor-pointer mx-auto">
+  
+  <!-- Image Background -->
+  <div class="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-40 transition-opacity duration-700">
+    <img src={image} alt={title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" loading="lazy" />
+  </div>
+  
+  <!-- Content -->
+  <div class="relative z-20 translate-y-6 group-hover:translate-y-0 transition-transform duration-500 pb-2">
+    <h3 class="font-subhead text-2xl lg:text-3xl text-cream mb-3 group-hover:text-ember transition-colors">{title}</h3>
+    <p class="font-body text-sm text-silver opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">{description}</p>
+    
+    <div class="w-0 h-[1px] bg-ember mt-5 group-hover:w-16 transition-all duration-700 ease-out"></div>
+  </div>
+  
+  <!-- Gradient -->
+  <div class="absolute inset-0 z-10 bg-gradient-to-t from-void via-void/80 to-transparent opacity-100 group-hover:opacity-80 transition-opacity duration-500"></div>
+</div>

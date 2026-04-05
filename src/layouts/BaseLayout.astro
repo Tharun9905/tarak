@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Professional photography, wedding coverage, cinematic reels and event photography in Kalyandurgam, Andhra Pradesh." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="Tarak Studio, Kalyandurgam photography, Kalyandurg studio, wedding photographer Anantapur, portrait photography AP" />
+    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:title" content="Tarak Studio — Kalyandurgam's Best Photography Studio" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Tarak Studio",
+        "description": "Professional photography, wedding coverage, cinematic reels and event photography in Kalyandurgam, Andhra Pradesh.",
+        "telephone": "+918919619403",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Ashok Building, 1/65, ATP Road, Jaynagar",
+          "addressLocality": "Kalyandurg",
+          "addressRegion": "Andhra Pradesh",
+          "postalCode": "515761",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 14.5641,
+          "longitude": 77.1107
+        },
+        "openingHours": "Mo-Su 09:30-21:30",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "ratingCount": "47"
+        },
+        "priceRange": "₹₹",
+        "image": "https://tarakstudio.in/og-image.jpg",
+        "url": "https://tarakstudio.in",
+        "sameAs": ["https://instagram.com/tarakstudio"]
+      }
+    </script>
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Film Grain Overlay -->
+    <div class="film-grain"></div>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <slot />
+  </body>
+</html>

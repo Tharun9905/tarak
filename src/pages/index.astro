@@ -1,0 +1,519 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Preloader from '../components/Preloader.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import VideoPlayer from '../components/VideoPlayer.jsx';
+import Gallery from '../components/Gallery.jsx';
+
+const services = [
+  { title: "Still Photography", desc: "Portraits that stop time.", img: "https://images.unsplash.com/photo-1551316679-9c6ae9dec224?q=80&w=800&auto=format&fit=crop" },
+  { title: "Wedding Coverage", desc: "Every vow. Every tear. Every joy.", img: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop" },
+  { title: "Cinematic Reels", desc: "Stories told in motion.", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800&auto=format&fit=crop" },
+  { title: "Family Portraits", desc: "Generations, framed forever.", img: "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop" },
+  { title: "Event Photography", desc: "Celebrations worth remembering.", img: "https://images.unsplash.com/photo-1540039155732-d05CDC382570?q=80&w=800&auto=format&fit=crop" },
+  { title: "Retouching", desc: "Raw to remarkable.", img: "https://images.unsplash.com/photo-1621535496660-66eecd9c748a?q=80&w=800&auto=format&fit=crop" }
+];
+---
+
+<BaseLayout title="Tarak Studio | Kalyandurgam Default UI">
+  <Preloader />
+  
+  <main class="relative z-10 w-full overflow-hidden bg-void">
+    <Hero />
+
+    <!-- SECTION 2: BRAND STATEMENT -->
+    <section id="statement" class="relative w-full min-h-[60vh] flex flex-col justify-center px-6 lg:px-20 py-24 bg-charcoal overflow-hidden border-y border-void">
+      <!-- Marquee background animation -->
+      <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center overflow-hidden">
+        <div class="flex animate-[marquee_40s_linear_infinite] whitespace-nowrap min-w-max">
+           <span class="text-[300px] font-display text-white px-8">WEDDINGS</span>
+           <span class="text-[300px] font-display text-white px-8">PORTRAITS</span>
+           <span class="text-[300px] font-display text-white px-8">EVENTS</span>
+           <span class="text-[300px] font-display text-white px-8">CINEMA</span>
+        </div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto w-full">
+        <h2 class="statement-text opacity-0">
+          <span class="block font-subhead text-3xl lg:text-5xl text-cream italic mb-4">The best studio in Kalyandurg <span class="text-ember">—</span></span>
+          <span class="block font-display text-6xl lg:text-[120px] text-ember leading-[0.85]">PROVEN BY EVERY FRAME.</span>
+        </h2>
+        
+        <div class="statement-proof opacity-0 mt-12 lg:absolute lg:right-0 lg:bottom-0 flex flex-col lg:items-end">
+          <div class="text-ember text-2xl tracking-widest mb-1 shadow-ember">★★★★★</div>
+          <div class="font-body text-sm text-silver">5/5 Rating — Locally Trusted</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SERVICES (Horizontal Scroll) -->
+    <section id="services" class="relative w-full h-[100svh] bg-void flex items-center overflow-hidden">
+      <!-- Section Title fixed during scroll -->
+      <div class="w-full pl-6 lg:pl-16 py-10 absolute top-0 left-0 z-10 pointers-event-none">
+        <h2 class="font-display text-5xl lg:text-7xl text-charcoal uppercase tracking-widest opacity-80">Our Expertise</h2>
+      </div>
+      
+      <div class="services-track flex gap-4 lg:gap-10 px-6 lg:px-20 pt-12 items-center will-change-transform">
+        {services.map((s) => (
+          <ServiceCard title={s.title} description={s.desc} image={s.img} />
+        ))}
+      </div>
+    </section>
+
+    <!-- SECTION 4: SHOWREEL -->
+    <section id="showreel" class="relative w-full py-24 lg:py-40 bg-charcoal">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-ember/10 via-void to-void pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+        <!-- Floating Text Elements -->
+        <div class="hidden lg:block absolute -top-8 left-0 font-subhead italic text-ember text-2xl float-el">Our finest work &rarr;</div>
+        <div class="hidden lg:block absolute -top-8 right-0 font-mono text-muted-film float-el-delay">Kalyandurgam &middot; 2024</div>
+        
+        <VideoPlayer 
+          client:visible 
+          title="Tarak Studio Showreel"
+          src="https://assets.mixkit.co/videos/preview/mixkit-wedding-photographer-in-action-12349-large.mp4" 
+          poster="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2669&auto=format&fit=crop" 
+        />
+        
+        <div class="mt-16 lg:mt-24 space-y-6 flex flex-col items-center">
+          <h2 class="font-display text-4xl lg:text-6xl tracking-wider text-cream">
+            5 YEARS. <span class="text-ember">1000+</span> SESSIONS. ONE NAME.
+          </h2>
+          <p class="font-body text-silver max-w-2xl text-center leading-relaxed">
+            Tarak Studio is Kalyandurgam's most trusted photography destination. Walk in or WhatsApp — we handle the rest.
+          </p>
+          <a href="https://wa.me/918919619403?text=Hello%20Tarak%20Studio%2C%20I%27d%20like%20to%20book%20a%20session." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-4 bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/50 hover:bg-[#25D366] hover:text-void rounded-full transition-all duration-300 font-bold tracking-wide mt-4 shadow-[0_0_15px_rgba(37,211,102,0.2)] hover:shadow-[0_0_25px_rgba(37,211,102,0.6)]">
+            <span>WhatsApp Us Now</span>
+            <span class="text-xl">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: PORTFOLIO -->
+    <section id="portfolio" class="w-full py-24 bg-void">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-16 lg:mb-20">
+          <h2 class="font-display text-6xl text-cream mb-2">THE <span class="text-ember">PROOF</span></h2>
+          <div class="w-24 h-1 bg-ember"></div>
+        </div>
+        
+        <Gallery client:visible />
+      </div>
+    </section>
+
+    <!-- SECTION 6: HOW IT WORKS -->
+    <section id="how-it-works" class="relative w-full h-screen bg-charcoal overflow-hidden flex items-center">
+      <!-- Background Parallax Image -->
+      <div class="absolute inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop" alt="Studio Background" class="w-full h-150% object-cover filter blur-[4px] opacity-20 parallax-bg" />
+        <div class="absolute inset-0 bg-void/80"></div>
+      </div>
+
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-6">
+        <div class="mb-12">
+          <h2 class="font-display text-5xl lg:text-8xl text-cream/30 uppercase tracking-widest absolute top-10 pointer-events-none">The Process</h2>
+        </div>
+        
+        <!-- Pinned timeline structure -->
+        <div class="timeline-container relative mt-20 lg:mt-32 h-[300px] flex items-center">
+          <div class="absolute left-0 w-full h-[1px] bg-silver/20 top-1/2 -translate-y-1/2"></div>
+          <div class="progress-line absolute left-0 w-0 h-[2px] bg-ember top-1/2 -translate-y-1/2 shadow-[0_0_10px_rgba(212,98,42,0.8)]"></div>
+          
+          <div class="steps-wrapper flex justify-between w-full relative z-10">
+            {[
+              { id: 1, icon: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z', title: "WhatsApp or Walk In", desc: "No appointments needed. We're here 9:30 AM–9:30 PM." },
+              { id: 2, icon: 'M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', title: "We Shoot. You Shine.", desc: "Professional lighting, candid moments, cinematic direction." },
+              { id: 3, icon: 'M2 12h4 M20 12h4 M12 2v4 M12 20v4 M4.9 4.9l2.8 2.8 M18.4 18.4l2.8 2.8 M4.9 19.1l2.8-2.8 M18.4 5.6l2.8-2.8', title: "Expert Retouching", desc: "24–72 hour turnaround on digital delivery." },
+              { id: 4, icon: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M7 10l5 5 5-5 M12 15V3', title: "Receive Masterpiece", desc: "High-res files delivered via WhatsApp or USB." }
+            ].map((step, i) => (
+              <div class={`step-item step-${i} flex flex-col items-center text-center opacity-0 translate-y-8 w-1/4 px-2`}>
+                <div class="icon-circle w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-void border border-silver/30 flex items-center justify-center mb-6 transition-colors duration-300 relative">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-silver icon-svg transition-colors duration-300">
+                    <path d={step.icon} />
+                  </svg>
+                  <div class="pulse-ring absolute inset-0 rounded-full border border-ember scale-150 opacity-0"></div>
+                </div>
+                <h4 class="font-subhead text-lg lg:text-xl text-cream mb-2">{step.title}</h4>
+                <p class="font-body text-xs lg:text-sm text-muted-film max-w-[200px] leading-relaxed hidden md:block">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: SOCIAL PROOF -->
+    <section id="reputation" class="w-full py-24 bg-void">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div class="text-center md:text-left">
+          <div class="text-ember text-3xl md:text-5xl tracking-widest mb-4">★★★★★</div>
+          <div class="flex items-end justify-center md:justify-start gap-4 mb-2">
+            <span class="font-display text-8xl md:text-[140px] text-ember leading-none">5.0</span>
+            <span class="counter font-display text-5xl text-cream leading-[2.5]">0+</span>
+          </div>
+          <div class="font-body text-lg text-cream mb-1">Perfect rating on local platforms</div>
+          <div class="font-mono text-sm text-muted-film">&mdash; Best Studio in KLD</div>
+          <p class="font-body text-silver mt-8 max-w-sm">
+            Based on google reviews and 1000+ successfully delivered projects.
+          </p>
+        </div>
+        
+        <div class="bg-charcoal p-8 lg:p-12 border border-charcoal/80 relative rounded-sm group hover:border-ember/30 transition-colors">
+          <div class="text-6xl text-ember opacity-20 absolute top-4 left-6 font-display">&ldquo;</div>
+          <p class="font-subhead text-xl lg:text-2xl text-cream italic relative z-10 leading-relaxed min-h-[120px] flex items-center">
+            "Our wedding photos are absolutely cinematic. Tarak sir is a genius. The best studio experience in Anantapur district."
+          </p>
+          <div class="mt-8 flex justify-between items-center text-sm">
+            <span class="font-body text-ember uppercase tracking-wider font-bold">Harika & Rahul</span>
+            <span class="font-mono text-muted-film">Kalyandurgam</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: ABOUT -->
+    <section id="about" class="w-full bg-charcoal overflow-hidden">
+      <div class="flex flex-col lg:flex-row min-h-[80vh]">
+        <!-- Image side -->
+        <div class="about-img-wrap w-full lg:w-[40%] relative py-16 lg:py-0 px-6 lg:px-0 flex items-center justify-center -translate-x-12 opacity-0">
+          <div class="relative w-full max-w-md aspect-[4/5] border-l-4 border-b-4 border-ember p-4">
+             <img src="https://images.unsplash.com/photo-1554046920-90dcac824104?q=80&w=1500&auto=format&fit=crop" alt="Tarak Studio Exterior" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" />
+             <!-- Film strip side decor -->
+             <div class="absolute -left-4 top-0 w-8 h-full bg-void flex flex-col justify-around py-2 items-center opacity-80">
+               {Array.from({length: 12}).map(() => (
+                 <div class="w-3 h-2 block bg-charcoal rounded-sm" />
+               ))}
+             </div>
+          </div>
+        </div>
+        
+        <!-- Text side -->
+        <div class="about-text-wrap w-full lg:w-[60%] flex flex-col justify-center px-6 lg:px-24 py-16 lg:py-0 translate-x-12 opacity-0">
+          <h2 class="font-display text-5xl lg:text-7xl text-cream mb-2">BUILT ON CRAFT.</h2>
+          <h3 class="font-subhead text-2xl lg:text-3xl text-ember italic mb-8">Kalyandurgam's Story.</h3>
+          
+          <div class="space-y-6 font-body text-silver text-base lg:text-lg max-w-2xl leading-relaxed">
+            <p>
+              Tarak Studio has been capturing the heart of Kalyandurgam from Ashok Building on ATP Road. Opposite City Palace, near the Tea Circle — we're where the town finds its memories.
+            </p>
+            <p>
+              From first-birthday portraits to silver jubilee celebrations, from government ID photos to full cinematic wedding productions — every frame is personal to us.
+            </p>
+            
+            <div class="pt-6 border-t border-silver/20 flex flex-wrap gap-4 text-sm font-mono text-ember mt-8 inline-block">
+              <span>📍 Jaynagar, Kalyandurg</span> <span class="text-silver/50">|</span>
+              <span>⏰ 9:30AM – 9:30PM</span> <span class="text-silver/50">|</span>
+              <span>⭐ 5/5 Rated</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: CONTACT & MAP -->
+    <section id="contact" class="w-full bg-void py-20 pb-0">
+      <div class="text-center mb-16">
+        <h2 class="font-display text-5xl lg:text-7xl text-cream">FIND US. <span class="text-ember">BOOK US.</span> TRUST US.</h2>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row w-full h-auto lg:h-[70vh]">
+        
+        <!-- Map Side -->
+        <div class="contact-map w-full lg:w-[60%] h-[400px] lg:h-full relative opacity-0 translate-y-12">
+          <!-- Stylized Google Map iframe -->
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15443.435777826356!2d77.0988012!3d14.5644158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb711e2f7ea2f15%3A0xc3afbf68c9284227!2sKalyandurg%2C%20Andhra%20Pradesh%20515761!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+            width="100%" height="100%" style="border:0; filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(120%);" 
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          
+          <div class="absolute bottom-6 left-6 right-6 lg:right-auto bg-void/90 backdrop-blur border border-charcoal p-6 lg:max-w-md shadow-2xl">
+            <h4 class="font-display text-2xl text-cream tracking-wider mb-2">Tarak Studio</h4>
+            <div class="font-body text-sm text-silver space-y-2">
+              <p>Ashok Building, 1/65, ATP Road,<br/>Jaynagar, Kalyandurg, AP 515761</p>
+              <p class="text-muted-film text-xs italic">Opposite City Palace, near Tea Circle</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Card Side -->
+        <div class="contact-form-wrap w-full lg:w-[40%] relative bg-[url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center">
+          <div class="absolute inset-0 bg-charcoal/95 backdrop-blur-xl"></div>
+          
+          <div class="relative z-10 w-full h-full flex flex-col justify-center px-8 py-16 lg:px-16">
+            <div class="space-y-8">
+              
+              <div class="flex items-start gap-4 group">
+                <div class="p-3 bg-void border border-silver/10 rounded-full group-hover:border-ember/50 transition-colors">
+                  <svg class="w-6 h-6 text-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                </div>
+                <div>
+                  <div class="font-mono text-sm text-muted-film mb-1">Call Us Directly</div>
+                  <a href="tel:+918919619403" class="font-subhead text-2xl text-cream hover:text-ember transition-colors">+91 89196 19403</a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <a href="https://wa.me/918919619403" class="w-full flex items-center justify-center gap-2 p-4 bg-void border border-green-500/30 rounded text-green-500 hover:bg-green-500 hover:text-void transition-colors font-bold tracking-wide shadow-[0_0_20px_rgba(34,197,94,0.1)] hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]">
+                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                 WhatsApp Now
+                </a>
+              </div>
+
+              <div class="py-6 border-y border-silver/10 grid grid-cols-2 gap-4 text-sm font-mono text-silver">
+                <div>
+                  <p class="text-ember mb-1">HOURS</p>
+                  <p>Mon–Sun</p>
+                  <p>9:30 AM – 9:30 PM</p>
+                </div>
+                <div>
+                  <p class="text-ember mb-1">PAYMENT</p>
+                  <p>UPI & Cash</p>
+                  <p>Card Accepted</p>
+                </div>
+              </div>
+
+              <!-- Setup via Netlify forms -->
+              <form name="contact" method="POST" data-netlify="true" class="space-y-4 pt-2">
+                <input type="hidden" name="form-name" value="contact" />
+                <div class="grid grid-cols-2 gap-4">
+                  <input type="text" name="name" required placeholder="Name" class="bg-void border border-silver/20 text-cream px-4 py-3 focus:outline-none focus:border-ember transition-colors placeholder:text-muted-film w-full rounded-sm" />
+                  <input type="tel" name="phone" required placeholder="Phone" class="bg-void border border-silver/20 text-cream px-4 py-3 focus:outline-none focus:border-ember transition-colors placeholder:text-muted-film w-full rounded-sm" />
+                </div>
+                <button type="submit" class="w-full bg-cream text-void font-bold tracking-widest uppercase py-4 hover:bg-ember transition-colors rounded-sm shadow-[0_0_15px_rgba(245,236,215,0.1)] hover:shadow-[0_0_20px_rgba(212,98,42,0.4)]">
+                 Contact Studio
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: FOOTER -->
+    <footer class="w-full bg-void py-12 lg:py-20 flex flex-col items-center">
+       <div class="mb-10 lg:mb-16 text-center">
+         <h2 class="font-display text-6xl lg:text-[100px] text-ember leading-none drop-shadow-[0_0_30px_rgba(212,98,42,0.2)]">TARAK STUDIO</h2>
+         <p class="font-mono text-muted-film tracking-widest text-xs lg:text-sm mt-4 uppercase">Ashok Building &middot; Jaynagar &middot; Kalyandurg</p>
+       </div>
+
+       <!-- Film reel divider -->
+       <div class="w-full h-8 mb-10 overflow-hidden relative opacity-30 flex items-center bg-charcoal border-y border-charcoal/50">
+          <div class="flex gap-4 animate-[marquee_20s_linear_infinite] w-[200%]">
+             {Array.from({length: 40}).map(() => <div class="w-4 h-4 rounded-sm border-2 border-ember bg-void shrink-0" />)}
+          </div>
+       </div>
+
+       <div class="w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-xs text-silver">
+         <div>&copy; {new Date().getFullYear()} Tarak Studio. All Rights Reserved.</div>
+         <div class="flex gap-6 uppercase tracking-wider">
+           <a href="#hero" class="hover:text-ember transition-colors">Home</a>
+           <a href="#services" class="hover:text-ember transition-colors">Services</a>
+           <a href="#portfolio" class="hover:text-ember transition-colors">Portfolio</a>
+         </div>
+         <div class="flex gap-4 items-center">
+           <a href="#" class="hover:text-ember transition-colors">IG</a>
+           <a href="https://wa.me/918919619403" class="hover:text-green-500 transition-colors">WA</a>
+         </div>
+       </div>
+    </footer>
+
+  </main>
+
+  <!-- Floating WhatsApp Action Button -->
+  <a href="https://wa.me/918919619403" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 flex items-center group">
+    <div class="bg-charcoal/80 backdrop-blur text-cream px-4 py-2 rounded-l-full translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 font-mono text-xs border border-charcoal">
+      Chat with us &rarr;
+    </div>
+    <div class="relative w-14 h-14 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+      <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      <div class="absolute inset-0 rounded-full border border-[#25D366] animate-ping opacity-75"></div>
+    </div>
+  </a>
+
+</BaseLayout>
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Custom Utility for splitting text by characters safely
+  function splitTextToChars(selector) {
+    document.querySelectorAll(selector).forEach(el => {
+      const text = el.innerText;
+      let html = '';
+      for (let char of text) {
+        if(char === ' ') {
+          html += '<span class="inline-block whitespace-pre">&nbsp;</span>';
+        } else {
+          html += `<span class="inline-block leading-none translate-y-full rotate-x-[-90deg] opacity-0 char-elem">${char}</span>`;
+        }
+      }
+      el.innerHTML = html;
+    });
+    return Array.from(document.querySelectorAll(`${selector} .char-elem`));
+  }
+
+  // Orchestration Timeline
+  const runAnimations = () => {
+    // 1. Preloader logic
+    const preloaderTL = gsap.timeline();
+    const preloaderText = document.querySelector('.preloader-text');
+    const preloaderBar = document.querySelector('.preloader-bar');
+    const preloader = document.getElementById('preloader');
+    
+    // Check if hero already visible (visited skipping)
+    if (!preloader || preloader.style.display === 'none') {
+       startHero();
+    } else {
+      preloaderTL
+        .to(preloaderText, { opacity: 1, letterSpacing: "0.2em", duration: 0.8, ease: "power2.out" })
+        .to(preloaderBar, { scaleX: 1, duration: 1.2, ease: "power2.inOut" }, "-=0.2")
+        .to(preloader, { opacity: 0, duration: 0.5, pointerEvents: "none", onComplete: () => {
+           preloader.style.display = 'none';
+           startHero();
+        } });
+    }
+
+    function startHero() {
+      // split characters inside hero
+      const targetChars = splitTextToChars('.hero-title-word');
+      
+      const heroTL = gsap.timeline();
+      heroTL
+        .to(targetChars, {
+           y: 0, 
+           rotateX: 0, 
+           opacity: 1,
+           stagger: 0.05, 
+           duration: 1.2, 
+           ease: "expo.out"
+        })
+        .to(".hero-sub", { y: 0, opacity: 1, duration: 0.8 }, "-=1")
+        .to(".right-panel", { x: 0, opacity: 1, duration: 1.2, ease: "power3.out" }, "-=1.2")
+        .to("#hero-video", { opacity: 1, duration: 1.5 }, "-=0.8");
+    }
+
+    // 2. Statement animations
+    gsap.to(".statement-text", {
+      opacity: 1, y: 0, duration: 1,
+      scrollTrigger: { trigger: "#statement", start: "top 70%" }
+    });
+    gsap.to(".statement-proof", {
+      opacity: 1, y: 0, duration: 0.8, delay: 0.4,
+      scrollTrigger: { trigger: "#statement", start: "top 70%" }
+    });
+
+    // 3. Horizontal Services Scroll
+    if(window.innerWidth > 1024) {
+      const track = document.querySelector('.services-track');
+      if (track) {
+        let scrollDist = track.scrollWidth - window.innerWidth;
+        gsap.to(track, {
+          x: -scrollDist,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#services",
+            pin: true,
+            scrub: 1.2,
+            end: () => "+=" + scrollDist
+          }
+        });
+      }
+    }
+
+    // 4. Video Player Entrance
+    gsap.from(".video-player-wrap", {
+      scale: 0.88, opacity: 0, duration: 1.2, ease: "power4.out",
+      scrollTrigger: { trigger: "#showreel", start: "top 70%" }
+    });
+
+    // 5. How It works timeline animation
+    const steps = gsap.utils.toArray('.step-item');
+    if (steps.length && window.innerWidth > 768) {
+       const stepsTL = gsap.timeline({
+         scrollTrigger: {
+           trigger: "#how-it-works",
+           pin: true,
+           scrub: 1,
+           start: "top top",
+           end: "+=200%"
+         }
+       });
+       
+       steps.forEach((step, i) => {
+         const delay = i * 0.5;
+         const svgIcon = step.querySelector('.icon-svg');
+         const pulse = step.querySelector('.pulse-ring');
+         
+         stepsTL
+           .to(step, { opacity: 1, y: 0, duration: 0.5 }, delay)
+           .to(".progress-line", { width: `${(i + 1) * 25}%`, duration: 0.5 }, delay)
+           .to(svgIcon, { color: '#D4622A', duration: 0.2 }, delay)
+           .to(pulse, { opacity: 1, scale: 1, duration: 0.3 }, delay)
+           .to(pulse, { opacity: 0, scale: 1.5, duration: 0.3 }, delay + 0.3);
+       });
+    } else {
+       // Mobile fallback
+       gsap.to('.step-item', {
+         opacity: 1, y: 0, stagger: 0.2,
+         scrollTrigger: { trigger: "#how-it-works", start: "top 60%" }
+       });
+    }
+
+    // 6. Number Counter
+    ScrollTrigger.create({
+      trigger: ".counter",
+      start: "top 80%",
+      onEnter: () => {
+        gsap.to({ val: 0 }, {
+          val: 1000, duration: 2.5, ease: "power3.out",
+          onUpdate: function() {
+            document.querySelector(".counter").textContent = Math.floor(this.targets()[0].val) + "+";
+          }
+        });
+      },
+      once: true
+    });
+
+    // 7. About Section Split Entrance
+    gsap.to(".about-img-wrap", {
+      x: 0, opacity: 1, duration: 1, ease: "power3.out",
+      scrollTrigger: { trigger: "#about", start: "top 65%" }
+    });
+    gsap.to(".about-text-wrap", {
+      x: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power3.out",
+      scrollTrigger: { trigger: "#about", start: "top 65%" }
+    });
+
+    // 8. Contact Section map drop
+    gsap.to(".contact-map", {
+      y: 0, opacity: 1, duration: 1, ease: "power3.out",
+      scrollTrigger: { trigger: "#contact", start: "top 70%" }
+    });
+  };
+
+  // Run on mount
+  document.addEventListener('DOMContentLoaded', runAnimations);
+  
+  // Custom Cursor Logic
+  if (window.innerWidth > 1024) {
+    const cursor = document.querySelector(".custom-cursor");
+    window.addEventListener("mousemove", (e) => {
+      gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, ease: "power2.out" });
+      if(cursor.style.opacity === '0' || cursor.style.opacity === '') {
+         cursor.style.opacity = '1';
+      }
+    });
+
+    document.querySelectorAll("a, button, .gallery-item, .service-card, .video-player-wrap").forEach(el => {
+      el.addEventListener("mouseenter", () => gsap.to(cursor, { scale: 3, backgroundColor: 'transparent', border: '1px solid #D4622A', duration: 0.3 }));
+      el.addEventListener("mouseleave", () => gsap.to(cursor, { scale: 1, backgroundColor: '#D4622A', border: 'none', duration: 0.3 }));
+    });
+  }
+</script>

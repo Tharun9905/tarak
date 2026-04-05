@@ -1,0 +1,21 @@
+---
+---
+<div id="preloader" class="fixed inset-0 z-[100] bg-void flex flex-col items-center justify-center overflow-hidden">
+  <div class="flex flex-col items-center border border-charcoal/30 px-12 py-10 rounded-sm">
+    <div class="preloader-text font-display text-4xl md:text-5xl text-cream tracking-[0.1em] opacity-0 uppercase mb-4">
+      TARAK STUDIO
+    </div>
+    <div class="w-48 md:w-64 h-[2px] bg-charcoal rounded overflow-hidden relative">
+      <div class="preloader-bar h-full bg-ember origin-left scale-x-0 absolute inset-0"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (typeof window !== 'undefined' && sessionStorage.getItem('tarak-visited') === 'true') {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.style.display = 'none';
+    }
+  }
+</script>
