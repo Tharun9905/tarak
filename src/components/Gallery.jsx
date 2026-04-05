@@ -9,20 +9,37 @@ const PORTFOLIO_DATA = [
   { id: 3, category: 'Events', src: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=2670&auto=format&fit=crop', alt: 'Event Celebration', span: 'col-span-1 row-span-1' },
   { id: 4, category: 'Weddings', src: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2670&auto=format&fit=crop', alt: 'Wedding Couple', span: 'col-span-1 row-span-1' },
   { id: 5, category: 'Portraits', src: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2670&auto=format&fit=crop', alt: 'Portrait Session', span: 'col-span-1 row-span-2' },
-  { id: 6, category: 'Events', src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2670&auto=format&fit=crop', alt: 'Live Event', span: 'col-span-1 row-span-1' }
+  { id: 6, category: 'Events', src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2670&auto=format&fit=crop', alt: 'Live Event', span: 'col-span-1 row-span-1' },
+  { id: 7, category: 'Weddings', src: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=2670&auto=format&fit=crop', alt: 'Wedding Rings', span: 'col-span-1 row-span-1' },
+  { id: 8, category: 'Portraits', src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=2670&auto=format&fit=crop', alt: 'Close up Portrait', span: 'col-span-1 row-span-1' }
 ];
+
+const ITEMS_PER_PAGE = 4;
 
 export default function Gallery() {
   const [activeTab, setActiveTab] = useState('All');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteredData = activeTab === 'All' 
     ? PORTFOLIO_DATA 
     : PORTFOLIO_DATA.filter(item => item.category === activeTab);
 
+  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const currentItems = filteredData.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
   const openLightbox = (index) => {
-    setCurrentIndex(index);
+    // index is relative to the current paginated view, calculate absolute
+    const absoluteIndex = (currentPage - 1) * ITEMS_PER_PAGE + index;
+    setCurrentIndex(absoluteIndex);
     setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -71,33 +88,55 @@ export default function Gallery() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 auto-rows-[250px]">
-        {filteredData.map((item, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-8">
+        {currentItems.map((item, index) => (
           <div 
             key={item.id}
             onClick={() => openLightbox(index)}
-            className={`gallery-item relative group overflow-hidden cursor-pointer bg-charcoal ${item.span} md:col-span-1 md:row-span-1`}
-            style={{ minHeight: '250px' }} // For mobile fallback
+            className="gallery-item relative group overflow-hidden cursor-pointer bg-charcoal h-[300px] md:h-[400px] w-full"
           >
             <img 
               src={item.src} 
               alt={item.alt}
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-700 lg:group-hover:scale-105"
             />
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-void/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center border border-transparent group-hover:border-ember/50">
+            {/* Hover Overlay - Only on Desktop */}
+            <div className="hidden lg:flex absolute inset-0 bg-void/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center border border-transparent group-hover:border-ember/50 pointer-events-none">
               <span className="font-display text-2xl tracking-widest text-cream translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                 VIEW <span className="text-ember">▶</span>
               </span>
             </div>
             
-            <div className="absolute bottom-4 left-4 font-mono text-xs text-cream/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+            <div className="absolute bottom-4 left-4 font-mono text-xs text-cream/70 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 bg-void/50 px-2 py-1 pointer-events-none">
               {item.category}
             </div>
           </div>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-4 mt-12 font-mono text-sm">
+           <button 
+             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+             disabled={currentPage === 1}
+             className="text-silver hover:text-ember disabled:opacity-30 disabled:hover:text-silver transition-colors"
+           >
+             &larr; PREV
+           </button>
+           <span className="text-cream border px-3 mt-[-2px] border-charcoal bg-void">
+             {currentPage} / {totalPages}
+           </span>
+           <button 
+             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+             disabled={currentPage === totalPages}
+             className="text-silver hover:text-ember disabled:opacity-30 disabled:hover:text-silver transition-colors"
+           >
+             NEXT &rarr;
+           </button>
+        </div>
+      )}
 
       {/* Lightbox */}
       {lightboxOpen && (
